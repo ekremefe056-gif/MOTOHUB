@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MotoHub — Ekkuş ile Motosiklet Dünyası</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --red: #e8002d;
+      --dark: #1a1a1a;
+      --gray: #f4f4f4;
+      --text: #222;
+      --border: #e0e0e0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #fff;
+      color: var(--text);
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      border-bottom: 2px solid var(--dark);
+      position: sticky;
+      top: 0;
+      background: #fff;
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.1em;
+      color: var(--dark);
+    }
+    .logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    /* HERO */
+    .hero {
+      padding: 80px 48px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: var(--dark);
+      margin-bottom: 24px;
+    }
+    .hero p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.7;
+      max-width: 420px;
+    }
+    .hero-visual {
+      background: var(--gray);
+      border-radius: 4px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      border: 1px solid var(--border);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 64px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 40px;
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      border-color: var(--red);
+      transform: translateY(-4px);
+    }
+    .card-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+    .card p { font-size: 0.88rem; color: #666; line-height: 1.6; }
+
+    /* MOTOR TİPLERİ */
+    .moto-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .moto-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 24px;
+      background: var(--gray);
+      border-radius: 4px;
+      border-left: 3px solid var(--red);
+    }
+    .moto-emoji { font-size: 2.5rem; }
+    .moto-item h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .moto-item p { font-size: 0.85rem; color: #666; line-height: 1.6; }
+
+    /* EKKUŞ CHAT */
+    #chat {
+      background: var(--gray);
+      border-radius: 8px;
+      padding: 32px;
+      max-width: 780px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+    }
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .chat-avatar {
+      width: 48px;
+      height: 48px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+    .chat-header-info h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+    }
+    .chat-header-info span {
+      font-size: 0.75rem;
+      color: #27ae60;
+      font-weight: 500;
+    }
+
+    .chat-messages {
+      min-height: 220px;
+      max-height: 340px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-right: 4px;
+    }
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-track { background: transparent; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .msg {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .msg.user { flex-direction: row-reverse; }
+    .msg-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .msg.user .msg-avatar { background: var(--dark); }
+    .msg-bubble {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px 12px 12px 0;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      max-width: 75%;
+      color: var(--text);
+    }
+    .msg.user .msg-bubble {
+      background: var(--dark);
+      color: #fff;
+      border-color: var(--dark);
+      border-radius: 12px 12px 0 12px;
+    }
+
+    .typing {
+      display: flex;
+      gap: 4px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px 12px 12px 0;
+      width: fit-content;
+    }
+    .typing span {
+      width: 7px;
+      height: 7px;
+      background: #aaa;
+      border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40%           { transform: translateY(-6px); }
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 12px;
+    }
+    .chat-input {
+      flex: 1;
+      padding: 14px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      background: #fff;
+      transition: border-color 0.2s;
+    }
+    .chat-input:focus { border-color: var(--dark); }
+    .chat-send {
+      padding: 14px 28px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .chat-send:hover { background: #c0001f; }
+    .chat-send:active { transform: scale(0.97); }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--dark);
+      color: #fff;
+    }
+    footer .logo { color: #fff; }
+    footer p { font-size: 0.8rem; color: #888; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { grid-template-columns: 1fr; padding: 40px 20px; }
+      .hero h1 { font-size: 3.5rem; }
+      .hero-visual { display: none; }
+      section { padding: 40px 20px; }
+      .cards { grid-template-columns: 1fr; }
+      .moto-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Moto<span>Hub</span></div>
+  <div class="nav-links">
+    <a href="#bilgi">Bilgi</a>
+    <a href="#tipler">Motor Tipleri</a>
+    <a href="#ekkus">Ekkuş</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-tag">🏍️ Motosiklet Dünyası</div>
+    <h1>MOTORU HİSSET, YOLU YAŞA</h1>
+    <p>Motosikletler hakkında merak ettiğin her şey burada. Motor tipleri, bakım ipuçları, sürüş teknikleri ve daha fazlası — üstelik yapay zeka asistanımız Ekkuş her an yanında!</p>
+  </div>
+  <div class="hero-visual">🏍️</div>
+</div>
+
+<!-- BİLGİ KARTLARI -->
+<section id="bilgi">
+  <div class="section-label">Temel Bilgiler</div>
+  <div class="section-title">MOTOSIKLET HAKKINDA HER ŞEY</div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">⚙️</div>
+      <h3>Motor Çalışma Prensibi</h3>
+      <p>Motosiklet motorları pistonlu içten yanmalı motorlardır. Yakıt ve hava karışımı silindir içinde yanar, pistonları hareket ettirir ve bu hareket tekerleklere iletilir.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛢️</div>
+      <h3>Yağ Değişimi</h3>
+      <p>Motor yağı genellikle her 3.000–5.000 km'de bir değiştirilmelidir. Düzenli yağ değişimi motorun ömrünü uzatır ve performansı korur.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔧</div>
+      <h3>Periyodik Bakım</h3>
+      <p>Fren kontrolü, zincir yağlama, lastik basıncı ve filtre temizliği en önemli periyodik bakım işlemlerindendir. Bunları ihmal etmemek güvenliğiniz için kritiktir.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⛽</div>
+      <h3>Yakıt Tüketimi</h3>
+      <p>Motosikletler arabalara kıyasla çok daha az yakıt tüketir. Ortalama bir motosiklet 100 km'de 3–6 litre yakıt tüketir, bu ekonomik bir avantajdır.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏎️</div>
+      <h3>CC (Motor Hacmi)</h3>
+      <p>CC motoru hacmini gösterir. 125cc yeni başlayanlar için uygunken, 600cc ve üzeri deneyimli sürücüler içindir. CC arttıkça güç ve hız da artar.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧤</div>
+      <h3>Güvenlik Ekipmanları</h3>
+      <p>Kask, eldiven, mont, bot ve diz koruyucu temel güvenlik ekipmanlarıdır. Her sürüşte tam ekipman kullanmak hayat kurtarır.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MOTOR TİPLERİ -->
+<section id="tipler">
+  <div class="section-label">Kategoriler</div>
+  <div class="section-title">MOTOR TİPLERİ</div>
+  <div class="moto-grid">
+    <div class="moto-item">
+      <div class="moto-emoji">🏍️</div>
+      <div>
+        <h4>Naked / Roadster</h4>
+        <p>Kaportasız, hafif ve manevra kabiliyeti yüksek motorlardır. Şehir içi kullanım için idealdir. Örnekler: Honda CB650R, Yamaha MT-07.</p>
+      </div>
+    </div>
+    <div class="moto-item">
+      <div class="moto-emoji">🏁</div>
+      <div>
+        <h4>Supersport</h4>
+        <p>Yüksek performanslı yarış odaklı motorlardır. Öne eğimli sürüş pozisyonu ve güçlü motor ile bilinir. Örnekler: Kawasaki ZX-6R, Yamaha R6.</p>
+      </div>
+    </div>
+    <div class="moto-item">
+      <div class="moto-emoji">🌍</div>
+      <div>
+        <h4>Adventure / Enduro</h4>
+        <p>Hem asfalt hem de arazi için tasarlanmıştır. Uzun yolculuklar ve off-road için idealdir. Örnekler: BMW GS serisi, KTM Adventure.</p>
+      </div>
+    </div>
+    <div class="moto-item">
+      <div class="moto-emoji">🛣️</div>
+      <div>
+        <h4>Touring</h4>
+        <p>Uzun mesafeli yolculuklar için tasarlanmıştır. Geniş depolama alanı, rüzgar kalkanı ve konforlu oturma pozisyonu sunar. Örnekler: Honda Gold Wing.</p>
+      </div>
+    </div>
+    <div class="moto-item">
+      <div class="moto-emoji">🤠</div>
+      <div>
+        <h4>Cruiser</h4>
+        <p>Alçak oturma pozisyonu ve klasik Amerikan tarzı tasarımıyla bilinir. Rahat şehir ve otoban sürüşü için uygundur. Örnekler: Harley-Davidson, Indian.</p>
+      </div>
+    </div>
+    <div class="moto-item">
+      <div class="moto-emoji">🐣</div>
+      <div>
+        <h4>125cc / Başlangıç</h4>
+        <p>Yeni başlayanlar ve şehir içi günlük kullanım için mükemmeldir. Ekonomik, hafif ve kullanımı kolaydır. Örnekler: Honda CB125R, Yamaha YZF-R125.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EKKUŞ CHAT -->
+<section id="ekkus">
+  <div class="section-label">Yapay Zeka Asistan</div>
+  <div class="section-title">EKKUŞ İLE SOHBET ET</div>
+  <div id="chat">
+    <div class="chat-header">
+      <div class="chat-avatar">🦅</div>
+      <div class="chat-header-info">
+        <h3>EKKUŞ</h3>
+        <span>● Çevrimiçi — Motosiklet Uzmanı AI</span>
+      </div>
+    </div>
+    <div class="chat-messages" id="messages">
+      <div class="msg">
+        <div class="msg-avatar">🦅</div>
+        <div class="msg-bubble">Merhaba! Ben Ekkuş 🦅 Motosikletler hakkında aklına takılan her şeyi sorabilirsin — bakım, model seçimi, sürüş teknikleri... Buyur!</div>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="userInput" type="text" placeholder="Motosiklet hakkında bir şey sor..." onkeydown="if(event.key==='Enter') sendMsg()"/>
+      <button class="chat-send" onclick="sendMsg()">GÖNDER</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Moto<span style="color:#e8002d">Hub</span></div>
+  <p>Ekkuş AI destekli • Üyelik gerektirmez • Türkçe motosiklet rehberi</p>
+</footer>
+
+<script>
+  const messagesEl = document.getElementById('messages');
+  const inputEl = document.getElementById('userInput');
+
+  function scrollBottom() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function addMsg(text, isUser) {
+    const div = document.createElement('div');
+    div.className = 'msg' + (isUser ? ' user' : '');
+    div.innerHTML = `
+      <div class="msg-avatar">${isUser ? '👤' : '🦅'}</div>
+      <div class="msg-bubble">${text}</div>
+    `;
+    messagesEl.appendChild(div);
+    scrollBottom();
+  }
+
+  function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'msg';
+    div.id = 'typing';
+    div.innerHTML = `
+      <div class="msg-avatar">🦅</div>
+      <div class="typing"><span></span><span></span><span></span></div>
+    `;
+    messagesEl.appendChild(div);
+    scrollBottom();
+    return div;
+  }
+
+  async function sendMsg() {
+    const text = inputEl.value.trim();
+    if (!text) return;
+    inputEl.value = '';
+    addMsg(text, true);
+    const typingEl = showTyping();
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: `Sen Ekkuş adında bir motosiklet uzmanı yapay zeka asistanısın. Sadece motosiklet, motor, bakım, sürüş güvenliği ve ilgili konularda yardımcı oluyorsun. Cevapların kısa, samimi ve Türkçe olsun. Eğer konu motosikletle ilgili değilse nazikçe konuyu motosiklete çek.`,
+          messages: [{ role: 'user', content: text }]
+        })
+      });
+      const data = await res.json();
+      typingEl.remove();
+      const reply = data.content?.[0]?.text || 'Bir sorun oluştu, tekrar dene!';
+      addMsg(reply, false);
+    } catch (e) {
+      typingEl.remove();
+      addMsg('Bağlantı hatası oluştu, lütfen tekrar dene!', false);
+    }
+  }
+</script>
+</body>
+</html>
